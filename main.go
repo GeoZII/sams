@@ -33,11 +33,6 @@ func main() {
 		flag.Usage()
 		return
 	}
-	
-		var promotionIds []string
-	if *promotionId != "" {
-		promotionIds = strings.Split(*promotionId, `,`)
-	}
 
 	session := dd.DingdongSession{}
 	conf := dd.Config{
@@ -49,7 +44,7 @@ func main() {
 		Latitude:     *latitude,                        //HTTP头部latitude,可选参数
 		Deviceid:     *deviceId,                        //HTTP头部device-id,可选参数
 		Trackinfo:    *trackInfo,                       //HTTP头部track-info,可选参数
-		PromotionId:  promotionIds, //优惠券id
+		PromotionId:  strings.Split(*promotionId, `,`), //优惠券id
 	}
 
 	err := session.InitSession(conf)
